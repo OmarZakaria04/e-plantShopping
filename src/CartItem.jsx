@@ -19,6 +19,14 @@ const CartItem = ({ onContinueShopping }) => {
  
   };
 
+  const calculateTotalQuantity = () => {
+    let total = 0;
+    cart.forEach(item => {
+        total += item.quantity;
+    });
+    return total;
+  };
+
   const handleContinueShopping = (e) => {
    if (onContinueShopping) {
         onContinueShopping(e);
@@ -56,6 +64,7 @@ const handleCheckoutShopping = (e) => {
   return (
     <div className="cart-container">
       <h2 style={{ color: 'black' }}>Total Cart Amount: ${calculateTotalAmount()}</h2>
+      <h3 style={{ color: 'black' }}>Total Items: {calculateTotalQuantity()}</h3>
       <div>
         {cart.map(item => (
           <div className="cart-item" key={item.name}>
@@ -78,7 +87,7 @@ const handleCheckoutShopping = (e) => {
       <div className="continue_shopping_btn">
         <button className="get-started-button" onClick={(e) => handleContinueShopping(e)}>Continue Shopping</button>
         <br />
-        <button className="get-started-button1">Checkout</button>
+        <button className="get-started-button1" onClick={handleCheckoutShopping}>Checkout</button>
       </div>
     </div>
   );
